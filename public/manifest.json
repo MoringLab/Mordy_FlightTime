@@ -1,0 +1,22 @@
+{
+  "name": "Gateway",
+  "short_name": "Mordy Gateway",
+  "description": "비행 시간 동안 집중해보세요.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F8F8",
+  "theme_color": "#6200EE",
+  "icons": [
+    {
+      "src": "/icons/icon-310x310.png",
+      "sizes": "310x310",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["study", "community", "lifestyle", "communication", "mordy", "gateway", "flight", "target", "book"],
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "scope": "/",
+  "orientation": "portrait"
+}

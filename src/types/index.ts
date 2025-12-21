@@ -22,6 +22,7 @@ export interface FlightDestination {
   durationMinutes: number;
   departureCoords: [number, number]; // [lat, lng]
   arrivalCoords: [number, number]; // [lat, lng]
+  date: string; // e.g., "2025/10/25"
 }
 
 export interface BookingState {
@@ -41,3 +42,28 @@ export interface BookingState {
 }
 
 export type SnapPoint = 'PEEK' | 'FULL';
+
+export interface FlightHistory {
+  id: string;
+  flightId: string;
+  departureCode: string;
+  departureName: string;
+  arrivalCode: string;
+  arrivalName: string;
+  departureCoords: [number, number];
+  arrivalCoords: [number, number];
+  durationMinutes: number;
+  focusType: FocusType;
+  seat: string;
+  completedAt: number; // timestamp
+  distance: number; // in km
+}
+
+export interface FlightStats {
+  totalFlights: number;
+  totalMinutes: number;
+  totalDistance: number;
+  uniqueCities: number;
+  favoriteDestination: string | null;
+  longestFlight: number; // minutes
+}

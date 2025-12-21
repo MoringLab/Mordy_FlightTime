@@ -3,47 +3,34 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { useMap } from 'react-leaflet';
 import { useBookingStore } from '@/store/bookingStore';
 import BoardingPass from '@/components/BoardingPass';
 
 const FlightMap = dynamic(() => import('@/components/FlightMap'), { ssr: false });
 const FlightRoute = dynamic(() => import('@/components/FlightRoute'), { ssr: false });
-
-function MapFitter({ start, end }: { start: [number, number]; end: [number, number] }) {
-  const map = useMap();
-
-  useEffect(() => {
-    // Import leaflet only on client side
-    import('leaflet').then(({ latLngBounds }) => {
-      const bounds = latLngBounds([start, end]);
-      map.fitBounds(bounds, {
-        padding: [100, 100],
-        animate: true,
-        duration: 1.5,
-      });
-    });
-  }, [start, end, map]);
-
-  return null;
-}
+const LocationMarkers = dynamic(() => import('@/components/LocationMarkers'), { ssr: false });
 
 function MapContent() {
-  const { selectedFlight } = useBookingStore();
+  const { selectedFlight, selectedDeparture } = useBookingStore();
 
-  if (!selectedFlight) return null;
+  if (!selectedFlight || !selectedDeparture) return null;
 
   return (
     <>
       <FlightRoute start={selectedFlight.departureCoords} end={selectedFlight.arrivalCoords} />
-      <MapFitter start={selectedFlight.departureCoords} end={selectedFlight.arrivalCoords} />
+      <LocationMarkers
+        departure={selectedFlight.departureCoords}
+        arrival={selectedFlight.arrivalCoords}
+        departureLabel={`${selectedDeparture.name} (${selectedDeparture.code})`}
+        arrivalLabel={`${selectedFlight.name} (${selectedFlight.code})`}
+      />
     </>
   );
 }
 
 export default function BoardingPassPage() {
   const router = useRouter();
-  const { selectedFlight, selectedSeat, selectedFocus, setStartTime } = useBookingStore();
+  const { selectedFlight, selectedDeparture, selectedSeat, selectedFocus, setStartTime } = useBookingStore();
 
   useEffect(() => {
     if (!selectedFlight || !selectedSeat || !selectedFocus) {
@@ -70,6 +57,9 @@ export default function BoardingPassPage() {
         flight={selectedFlight}
         seat={selectedSeat}
         focus={selectedFocus}
+        departureCode={selectedDeparture?.code}
+        departureName={selectedDeparture?.name}
+        departureCoords={selectedFlight.departureCoords}
         onStartFocus={handleStartFocus}
       />
 

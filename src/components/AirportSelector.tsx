@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Airport } from '@/types';
-import { MapPin } from 'lucide-react';
 
 interface AirportSelectorProps {
   airports: Airport[];

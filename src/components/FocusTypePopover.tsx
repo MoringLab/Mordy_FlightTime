@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { FocusType } from '@/types';
-import { Laptop, BookOpen, Coffee, Moon } from 'lucide-react';
+import { Laptop, BookOpen, Coffee, Moon, LucideIcon } from 'lucide-react';
 
 interface FocusTypePopoverProps {
   isOpen: boolean;
@@ -11,7 +11,7 @@ interface FocusTypePopoverProps {
   onClose: () => void;
 }
 
-const FOCUS_TYPES: { type: FocusType; icon: any; label: string; color: string }[] = [
+const FOCUS_TYPES: { type: FocusType; icon: LucideIcon; label: string; color: string }[] = [
   { type: 'work', icon: Laptop, label: 'Work', color: 'bg-work' },
   { type: 'study', icon: BookOpen, label: 'Study', color: 'bg-study' },
   { type: 'relax', icon: Coffee, label: 'Relax', color: 'bg-relax' },

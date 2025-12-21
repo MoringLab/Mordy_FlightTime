@@ -49,6 +49,21 @@ html, body {
   z-index: 0 !important;
 }
 
+/* Hide tile loading artifacts */
+.leaflet-tile-container {
+  background: #000000;
+}
+
+.leaflet-tile {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Tiles load instantly without fade animation */
+.leaflet-tile {
+  opacity: 1;
+}
+
 .leaflet-pane {
   z-index: 0 !important;
 }
@@ -82,4 +97,9 @@ html, body {
 .leaflet-marker-pane .leaflet-marker-icon.plane-marker {
   will-change: transform;
   transition: none !important;
+}
+
+/* Dark overlay for satellite imagery - Apple Maps style */
+.map-tiles-dark {
+  filter: brightness(0.7) contrast(1.1) saturate(0.9);
 }
